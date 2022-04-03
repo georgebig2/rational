@@ -3,6 +3,12 @@ mod ops;
 
 use extras::gcd;
 use std::fmt::Display;
+//use extras::*;
+
+pub trait Intof64: Sized
+{
+    fn into_f64(self) -> f64;
+}
 
 /// A rational number (a fraction of two integers).
 #[derive(Copy, Clone, Debug, Hash, PartialEq)]
@@ -309,6 +315,13 @@ impl_from!(i32);
 impl_from!(i64);
 impl_from!(i128);
 impl_from!(isize);
+
+impl Intof64 for Rational {
+    fn into_f64(self) -> f64 {
+        self.decimal_value()
+    }
+}
+
 
 impl<T, U> From<(T, U)> for Rational
 where
